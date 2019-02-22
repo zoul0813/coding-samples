@@ -1,0 +1,12 @@
+{
+  "name": "thread-sync",
+  "version": "0.0.0",
+  "description": "Prints all positive integers from 1 to 100, integers are handled by two threads (odd and even)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "David Higgins",
+  "license": "ISC"
+}

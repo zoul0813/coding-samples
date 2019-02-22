@@ -1,0 +1,12 @@
+{
+  "name": "optimized-math",
+  "version": "0.0.0",
+  "description": "Prints all positive integers from 1 to 100, identifying the type (odd, even, /3, /2 && /3)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "David Higgins",
+  "license": "ISC"
+}
