@@ -3,7 +3,6 @@ const { Worker } = require('worker_threads');
 function runService(workerData) {
     return new Promise((resolve, reject) => {
         const worker = new Worker('./service.js', { workerData });
-        console.log('Threading', worker.threadId);
         worker.on('message', (data) => resolve({ thread: worker.threadId, results: data }));
         worker.on('error', reject);
         worker.on('exit', (code) => {
@@ -16,8 +15,9 @@ function runService(workerData) {
 
 async function run() {
     Promise.all([
-        runService({ type: 'odd', start: 1, end: 13 }), 
-        runService({ type: 'even', start: 1, end: 13 })
+        // start and end can be any combination
+        runService({ type: 'odd', start: 1, end: 100 }), 
+        runService({ type: 'even', start: 1, end: 100 })
     ]).then((data) => {
         let odds = data[0].results;
         let evens = data[1].results;
@@ -28,10 +28,14 @@ async function run() {
             if(i < odds.length) results.push('Thread ' + data[0].thread + ': The number is \'' + odds[i] + '\'');
             if(i < evens.length) results.push('Thread ' + data[1].thread + ': The number is \'' + evens[i] + '\'');
         }
-        console.log('results', results);
+        return results;
     }).catch((err) => {
         console.error(err);
-    })
+    }).then((results) => {
+        results.forEach((result) => {
+            console.log(result);
+        });
+    });
 }
 
 run().catch((err) => console.error(err) );
